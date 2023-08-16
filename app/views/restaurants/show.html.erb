@@ -1,0 +1,21 @@
+<div class="container">
+  <h1> <%= @restaurant.name %> </h1>
+  <p> <%= @restaurant.address %> </p>
+  <p> <%= @restaurant.phone_number %> </p>
+  <p> <%= @restaurant.category %> </p>
+
+  <h2>Reviews</h2>
+
+  <%= render @restaurant.reviews %>
+
+  <%# pass @restaurant in order to find restaurant id %>
+  <h1>Add a review</h1>
+  <%= simple_form_for [@restaurant, Review.new] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating, collection: 1..5, prompt: "Select a rating" %>
+    <%= f.submit "Submit review", class: "btn btn-primary" %>
+  <% end %>
+  <hr>
+
+  <%= link_to '< All restaurants', restaurants_path %> | <%= link_to 'edit', edit_restaurant_path(@restaurant) %>
+</div>
